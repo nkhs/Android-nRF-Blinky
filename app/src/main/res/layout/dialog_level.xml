@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="horizontal">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="5dp"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:paddingBottom="5dp">
+
+        <Button
+            android:id="@+id/btn_level_1"
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/start_stop_button_background"
+            android:text="@string/level_1"
+            android:textAllCaps="false" />
+
+        <Button
+            android:id="@+id/btn_level_2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/start_stop_button_background"
+            android:text="@string/level_2"
+            android:textAllCaps="false" />
+
+        <Button
+            android:id="@+id/btn_level_3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/start_stop_button_background"
+            android:text="@string/level_3"
+            android:textAllCaps="false" />
+
+        <Button
+            android:id="@+id/btn_level_4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/start_stop_button_background"
+            android:text="@string/level_4"
+            android:textAllCaps="false" />
+
+        <Button
+            android:id="@+id/btn_level_5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/start_stop_button_background"
+            android:text="@string/level_5"
+            android:textAllCaps="false" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="15dp"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:paddingBottom="5dp">
+
+        <Button
+            android:id="@+id/btn_level_6"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/start_stop_button_background"
+            android:text="@string/level_6"
+            android:textAllCaps="false" />
+
+        <Button
+            android:id="@+id/btn_level_7"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/start_stop_button_background"
+            android:text="@string/level_7"
+            android:textAllCaps="false" />
+
+        <Button
+            android:id="@+id/btn_level_8"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/start_stop_button_background"
+            android:text="@string/level_8"
+            android:textAllCaps="false" />
+
+        <Button
+            android:id="@+id/btn_level_9"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/start_stop_button_background"
+            android:text="@string/level_9"
+            android:textAllCaps="false" />
+
+        <Button
+            android:id="@+id/btn_level_10"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/start_stop_button_background"
+            android:text="@string/level_10"
+            android:textAllCaps="false" />
+
+    </LinearLayout>
+
+</LinearLayout>

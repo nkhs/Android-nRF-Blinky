@@ -70,4 +70,18 @@
 	<string name="state_discovering_services_completed">%s ready</string>
 	<string name="state_not_supported">Device does not have required services.</string>
 	<string name="state_disconnected">Device disconnected.</string>
+    <string name="stop">Stop</string>
+	<string name="start">Start</string>
+    <string name="stop_random">Stop Random</string>
+	<string name="start_random">Start Random</string>
+    <string name="level_10">Level 10</string>
+    <string name="level_1">Level 1</string>
+    <string name="level_2">Level 2</string>
+	<string name="level_3">Level 3</string>
+	<string name="level_4">Level 4</string>
+	<string name="level_5">Level 5</string>
+	<string name="level_6">Level 6</string>
+    <string name="level_9">Level 9</string>
+	<string name="level_8">Level 8</string>
+	<string name="level_7">Level 7</string>
 </resources>
