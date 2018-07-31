@@ -51,12 +51,12 @@
     </android.support.design.widget.AppBarLayout>
 
     <!--<ImageView-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_alignParentBottom="true"-->
-        <!--android:layout_centerHorizontal="true"-->
-        <!--android:layout_marginBottom="8dp"-->
-        <!--android:src="@drawable/background_title" />-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_alignParentBottom="true"-->
+    <!--android:layout_centerHorizontal="true"-->
+    <!--android:layout_marginBottom="8dp"-->
+    <!--android:src="@drawable/background_title" />-->
 
     <ScrollView
         android:id="@+id/device_container"
@@ -71,15 +71,10 @@
             android:orientation="vertical">
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="20dp"
-                android:src="@drawable/header" />
-
-            <ImageView
                 android:layout_width="match_parent"
-                android:layout_height="220dp"
+                android:layout_height="match_parent"
+                android:adjustViewBounds="true"
+                android:scaleType="fitCenter"
                 android:src="@drawable/net_knights_logo" />
 
             <ToggleButton
@@ -89,8 +84,10 @@
                 android:layout_gravity="center"
                 android:layout_marginLeft="30dp"
                 android:layout_marginRight="30dp"
+                android:layout_marginTop="20dp"
                 android:background="@drawable/start_stop_button_background"
                 android:textAllCaps="false"
+                android:textColor="#FFFFFF"
                 android:textOff="@string/start"
                 android:textOn="@string/stop" />
 
@@ -99,12 +96,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginLeft="70dp"
-                android:layout_marginRight="70dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
                 android:layout_marginTop="10dp"
                 android:background="@drawable/start_stop_button_background"
                 android:text="@string/level_10"
-                android:textAllCaps="false" />
+                android:textAllCaps="false"
+                android:textColor="#FFFFFF" />
 
             <ToggleButton
                 android:id="@+id/btn_start_random_stop_toggle"
@@ -113,9 +111,10 @@
                 android:layout_gravity="center"
                 android:layout_marginLeft="30dp"
                 android:layout_marginRight="30dp"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="10dp"
                 android:background="@drawable/start_stop_button_background"
                 android:textAllCaps="false"
+                android:textColor="#FFFFFF"
                 android:textOff="@string/start_random"
                 android:textOn="@string/stop_random" />
 

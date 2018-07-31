@@ -40,18 +40,21 @@ public class BlinkyManager extends BleManager<BlinkyManagerCallbacks> {
     /**
      * Nordic Blinky Service UUID.
      */
-//	public final static UUID LBS_UUID_SERVICE = UUID.fromString("00001523-1212-efde-1523-785feabcd123");
-    public final static UUID LBS_UUID_SERVICE = UUID.fromString("00001207-0000-1000-8000-00805f9b34fb");
+    public final static UUID LBS_UUID_SERVICE = UUID.fromString("00001975-0000-1000-8000-00805f9b34fb");
+//    public final static UUID LBS_UUID_SERVICE = UUID.fromString("00001207-0000-1000-8000-00805f9b34fb");
     /**
      * BUTTON characteristic UUID.
      */
-//	private final static UUID LBS_UUID_MODE_CHAR = UUID.fromString("00001524-1212-efde-1523-785feabcd123");
-    private final static UUID LBS_UUID_MODE_CHAR = UUID.fromString("00001208-0000-1000-8000-00805f9b34fb");
+    private final static UUID LBS_UUID_MODE_CHAR = UUID.fromString("00001006-0000-1000-8000-00805f9b34fb");
+//    private final static UUID LBS_UUID_MODE_CHAR = UUID.fromString("00001208-0000-1000-8000-00805f9b34fb");
     /**
      * LED characteristic UUID.
      */
-//	private final static UUID LBS_UUID_LEVEL_CHAR = UUID.fromString("00001525-1212-efde-1523-785feabcd123");
-    private final static UUID LBS_UUID_LEVEL_CHAR = UUID.fromString("00001209-0000-1000-8000-00805f9b34fb");
+    private final static UUID LBS_UUID_LEVEL_CHAR = UUID.fromString("00001007-0000-1000-8000-00805f9b34fb");
+//    private final static UUID LBS_UUID_LEVEL_CHAR = UUID.fromString("00001209-0000-1000-8000-00805f9b34fb");
+
+    private final static UUID LBS_UUID_MODE_NOTI_CHAR = UUID.fromString("00001006-0000-1000-8000-00805f9b34fb");
+//    private final static UUID LBS_UUID_MODE_NOTI_CHAR = UUID.fromString("00001208-0000-1000-8000-00805f9b34fb");
 
     private BluetoothGattCharacteristic mModeCharacteristic, mLevelCharacteristic;
 
