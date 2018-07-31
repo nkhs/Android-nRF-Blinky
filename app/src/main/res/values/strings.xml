@@ -82,4 +82,5 @@
     <string name="level_9">Level 9</string>
     <string name="level_8">Level 8</string>
     <string name="level_7">Level 7</string>
+    <string name="turn_knob_off_to_enable">Turn knob OFF to enable</string>
 </resources>

@@ -5,7 +5,7 @@ android {
     buildToolsVersion '27.0.3'
 
     defaultConfig {
-        applicationId "no.nordicsemi.android.nrfblinky"
+        applicationId "com.ble.android.netknight"
         minSdkVersion 18
         targetSdkVersion 27
         versionCode 6
@@ -32,6 +32,11 @@ android {
     }
 }
 
+repositories {
+    mavenCentral()
+    jcenter()
+}
+
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'com.android.support:appcompat-v7:27.1.1'
@@ -50,4 +55,6 @@ dependencies {
     implementation 'no.nordicsemi.android:log:2.1.1'
     // BLE library
     implementation 'no.nordicsemi.android:ble:1.2.0'
+    // Switch
+    implementation 'com.github.zcweng:switch-button:0.0.3@aar'
 }

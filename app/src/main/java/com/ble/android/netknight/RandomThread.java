@@ -1,6 +1,4 @@
-package no.nordicsemi.android.blinky;
-
-import android.util.Log;
+package com.ble.android.netknight;
 
 import java.util.Random;
 

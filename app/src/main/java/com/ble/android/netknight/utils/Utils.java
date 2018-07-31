@@ -28,7 +28,7 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package no.nordicsemi.android.blinky.utils;
+package com.ble.android.netknight.utils;
 
 import android.Manifest;
 import android.app.Activity;

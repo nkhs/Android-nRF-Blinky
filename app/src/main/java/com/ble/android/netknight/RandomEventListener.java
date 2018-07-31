@@ -1,4 +1,4 @@
-package no.nordicsemi.android.blinky;
+package com.ble.android.netknight;
 
 public interface RandomEventListener {
     void onSpeed(byte speed);

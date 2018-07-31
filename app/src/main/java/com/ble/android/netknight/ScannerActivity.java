@@ -28,7 +28,7 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package no.nordicsemi.android.blinky;
+package com.ble.android.netknight;
 
 import android.Manifest;
 import android.arch.lifecycle.ViewModelProviders;
@@ -52,41 +52,41 @@ import android.widget.Button;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import no.nordicsemi.android.blinky.adapter.DevicesAdapter;
-import no.nordicsemi.android.blinky.adapter.ExtendedBluetoothDevice;
-import no.nordicsemi.android.blinky.utils.Utils;
-import no.nordicsemi.android.blinky.viewmodels.ScannerLiveData;
-import no.nordicsemi.android.blinky.viewmodels.ScannerViewModel;
+import com.ble.android.netknight.adapter.DevicesAdapter;
+import com.ble.android.netknight.adapter.ExtendedBluetoothDevice;
+import com.ble.android.netknight.utils.Utils;
+import com.ble.android.netknight.viewmodels.ScannerLiveData;
+import com.ble.android.netknight.viewmodels.ScannerViewModel;
 
 public class ScannerActivity extends AppCompatActivity implements DevicesAdapter.OnItemClickListener {
 	private static final int REQUEST_ACCESS_COARSE_LOCATION = 1022; // random number
 
 	private ScannerViewModel mScannerViewModel;
 
-	@BindView(R.id.state_scanning) View mScanningView;
-	@BindView(R.id.no_devices)View mEmptyView;
-	@BindView(R.id.no_location_permission) View mNoLocationPermissionView;
-	@BindView(R.id.action_grant_location_permission) Button mGrantPermissionButton;
-	@BindView(R.id.action_permission_settings) Button mPermissionSettingsButton;
-	@BindView(R.id.no_location)	View mNoLocationView;
-	@BindView(R.id.bluetooth_off) View mNoBluetoothView;
+	@BindView(no.nordicsemi.android.blinky.R.id.state_scanning) View mScanningView;
+	@BindView(no.nordicsemi.android.blinky.R.id.no_devices)View mEmptyView;
+	@BindView(no.nordicsemi.android.blinky.R.id.no_location_permission) View mNoLocationPermissionView;
+	@BindView(no.nordicsemi.android.blinky.R.id.action_grant_location_permission) Button mGrantPermissionButton;
+	@BindView(no.nordicsemi.android.blinky.R.id.action_permission_settings) Button mPermissionSettingsButton;
+	@BindView(no.nordicsemi.android.blinky.R.id.no_location)	View mNoLocationView;
+	@BindView(no.nordicsemi.android.blinky.R.id.bluetooth_off) View mNoBluetoothView;
 
 	@Override
 	protected void onCreate(@Nullable final Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_scanner);
+		setContentView(no.nordicsemi.android.blinky.R.layout.activity_scanner);
 		ButterKnife.bind(this);
 
-		final Toolbar toolbar = findViewById(R.id.toolbar);
+		final Toolbar toolbar = findViewById(no.nordicsemi.android.blinky.R.id.toolbar);
 		setSupportActionBar(toolbar);
-		getSupportActionBar().setTitle(R.string.app_name);
+		getSupportActionBar().setTitle(no.nordicsemi.android.blinky.R.string.app_name);
 
 		// Create view model containing utility methods for scanning
 		mScannerViewModel = ViewModelProviders.of(this).get(ScannerViewModel.class);
 		mScannerViewModel.getScannerState().observe(this, this::startScan);
 
 		// Configure the recycler view
-		final RecyclerView recyclerView = findViewById(R.id.recycler_view_ble_devices);
+		final RecyclerView recyclerView = findViewById(no.nordicsemi.android.blinky.R.id.recycler_view_ble_devices);
 		recyclerView.setLayoutManager(new LinearLayoutManager(this));
 		final DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(recyclerView.getContext(), DividerItemDecoration.VERTICAL);
 		recyclerView.addItemDecoration(dividerItemDecoration);
@@ -119,25 +119,25 @@ public class ScannerActivity extends AppCompatActivity implements DevicesAdapter
 		}
 	}
 
-	@OnClick(R.id.action_enable_location)
+	@OnClick(no.nordicsemi.android.blinky.R.id.action_enable_location)
 	public void onEnableLocationClicked() {
 		final Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
 		startActivity(intent);
 	}
 
-	@OnClick(R.id.action_enable_bluetooth)
+	@OnClick(no.nordicsemi.android.blinky.R.id.action_enable_bluetooth)
 	public void onEnableBluetoothClicked() {
 		final Intent enableIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
 		startActivity(enableIntent);
 	}
 
-	@OnClick(R.id.action_grant_location_permission)
+	@OnClick(no.nordicsemi.android.blinky.R.id.action_grant_location_permission)
 	public void onGrantLocationPermissionClicked() {
 		Utils.markLocationPermissionRequested(this);
 		ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, REQUEST_ACCESS_COARSE_LOCATION);
 	}
 
-	@OnClick(R.id.action_permission_settings)
+	@OnClick(no.nordicsemi.android.blinky.R.id.action_permission_settings)
 	public void onPermissionSettingsClicked() {
 		final Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
 		intent.setData(Uri.fromParts("package", getPackageName(), null));

@@ -28,15 +28,12 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package no.nordicsemi.android.blinky;
+package com.ble.android.netknight;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.view.View;
-import android.view.animation.AlphaAnimation;
-import android.view.animation.Animation;
 
 public class SplashScreenActivity extends Activity {
 	private static final int DURATION = 1000;
@@ -44,7 +41,7 @@ public class SplashScreenActivity extends Activity {
 	@Override
 	protected void onCreate(final Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_splash_screen);
+		setContentView(no.nordicsemi.android.blinky.R.layout.activity_splash_screen);
 
 		new Handler().postDelayed(() -> {
 			final Intent intent = new Intent(SplashScreenActivity.this, ScannerActivity.class);

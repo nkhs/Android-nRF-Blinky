@@ -28,7 +28,7 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package no.nordicsemi.android.blinky.viewmodels;
+package com.ble.android.netknight.viewmodels;
 
 import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
@@ -36,11 +36,12 @@ import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
 import android.bluetooth.BluetoothDevice;
 import android.support.annotation.NonNull;
+import android.util.Log;
 
 import no.nordicsemi.android.blinky.R;
-import no.nordicsemi.android.blinky.adapter.ExtendedBluetoothDevice;
-import no.nordicsemi.android.blinky.profile.BlinkyManager;
-import no.nordicsemi.android.blinky.profile.BlinkyManagerCallbacks;
+import com.ble.android.netknight.adapter.ExtendedBluetoothDevice;
+import com.ble.android.netknight.profile.BlinkyManager;
+import com.ble.android.netknight.profile.BlinkyManagerCallbacks;
 import no.nordicsemi.android.log.LogSession;
 import no.nordicsemi.android.log.Logger;
 
@@ -61,7 +62,8 @@ public class BlinkyViewModel extends AndroidViewModel implements BlinkyManagerCa
 
 
     // Flag that holds the pressed released state of the button on the devkit. Pressed is true, Released is False
-    private final MutableLiveData<Boolean> mButtonState = new MutableLiveData<>();
+    private final MutableLiveData<Integer> mLevelState = new MutableLiveData<>();
+    private final MutableLiveData<Integer> mModeState = new MutableLiveData<>();
 
     public LiveData<Void> isDeviceReady() {
         return mOnDeviceReady;
@@ -75,8 +77,12 @@ public class BlinkyViewModel extends AndroidViewModel implements BlinkyManagerCa
         return mIsConnected;
     }
 
-    public LiveData<Boolean> getButtonState() {
-        return mButtonState;
+    public LiveData<Integer> getLevelState() {
+        return mLevelState;
+    }
+
+    public LiveData<Integer> getModeState() {
+        return mModeState;
     }
 
     public LiveData<Boolean> isSupported() {
@@ -125,13 +131,14 @@ public class BlinkyViewModel extends AndroidViewModel implements BlinkyManagerCa
     }
 
     @Override
-    public void onDataReceived(final boolean state) {
-        mButtonState.postValue(state);
+    public void onLevelReceived(final int state) {
+        Log.d("TAG", "" + state);
+        mLevelState.postValue(state);
     }
 
     @Override
-    public void onDataSent(final boolean state) {
-
+    public void onModeReceived(final int mode) {
+        mModeState.postValue(mode);
     }
 
     @Override

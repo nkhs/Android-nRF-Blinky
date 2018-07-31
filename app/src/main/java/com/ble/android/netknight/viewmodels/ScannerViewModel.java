@@ -28,7 +28,7 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package no.nordicsemi.android.blinky.viewmodels;
+package com.ble.android.netknight.viewmodels;
 
 import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
@@ -40,11 +40,12 @@ import android.content.IntentFilter;
 import android.location.LocationManager;
 import android.os.ParcelUuid;
 
+import com.ble.android.netknight.profile.BlinkyManager;
+import com.ble.android.netknight.utils.Utils;
+
 import java.util.ArrayList;
 import java.util.List;
 
-import no.nordicsemi.android.blinky.profile.BlinkyManager;
-import no.nordicsemi.android.blinky.utils.Utils;
 import no.nordicsemi.android.support.v18.scanner.BluetoothLeScannerCompat;
 import no.nordicsemi.android.support.v18.scanner.ScanCallback;
 import no.nordicsemi.android.support.v18.scanner.ScanFilter;

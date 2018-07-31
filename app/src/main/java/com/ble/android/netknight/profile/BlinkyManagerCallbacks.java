@@ -20,7 +20,7 @@
  * USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package no.nordicsemi.android.blinky.profile;
+package com.ble.android.netknight.profile;
 
 import no.nordicsemi.android.ble.BleManagerCallbacks;
 
@@ -31,12 +31,12 @@ public interface BlinkyManagerCallbacks extends BleManagerCallbacks {
 	 *
 	 * @param state true if the button was pressed, false if released
 	 */
-	void onDataReceived(final boolean state);
+	void onLevelReceived(final int state);
 
 	/**
 	 * Called when the data has been sent to the connected device.
 	 *
 	 * @param state true when LED was enabled, false when disabled
 	 */
-	void onDataSent(final boolean state);
+	void onModeReceived(final int state);
 }

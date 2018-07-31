@@ -20,7 +20,7 @@
  * USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package no.nordicsemi.android.blinky.profile;
+package com.ble.android.netknight.profile;
 
 import android.bluetooth.BluetoothGatt;
 import android.bluetooth.BluetoothGattCharacteristic;
@@ -40,7 +40,7 @@ public class BlinkyManager extends BleManager<BlinkyManagerCallbacks> {
     /**
      * Nordic Blinky Service UUID.
      */
-    public final static UUID LBS_UUID_SERVICE = UUID.fromString("00001975-0000-1000-8000-00805f9b34fb");
+    public final static UUID LBS_UUID_SERVICE = UUID.fromString("00001977-0000-1000-8000-00805f9b34fb");//180d
 //    public final static UUID LBS_UUID_SERVICE = UUID.fromString("00001207-0000-1000-8000-00805f9b34fb");
     /**
      * BUTTON characteristic UUID.
@@ -50,13 +50,13 @@ public class BlinkyManager extends BleManager<BlinkyManagerCallbacks> {
     /**
      * LED characteristic UUID.
      */
-    private final static UUID LBS_UUID_LEVEL_CHAR = UUID.fromString("00001007-0000-1000-8000-00805f9b34fb");
+    private final static UUID LBS_UUID_LEVEL_CHAR = UUID.fromString("00001028-0000-1000-8000-00805f9b34fb");//2a37
 //    private final static UUID LBS_UUID_LEVEL_CHAR = UUID.fromString("00001209-0000-1000-8000-00805f9b34fb");
 
-    private final static UUID LBS_UUID_MODE_NOTI_CHAR = UUID.fromString("00001006-0000-1000-8000-00805f9b34fb");
-//    private final static UUID LBS_UUID_MODE_NOTI_CHAR = UUID.fromString("00001208-0000-1000-8000-00805f9b34fb");
+    private final static UUID LBS_UUID_MODE_NOTIFY_CHAR = UUID.fromString("00001006-0000-1000-8000-00805f9b34fb");
+//    private final static UUID LBS_UUID_MODE_NOTIFY_CHAR = UUID.fromString("00001210-0000-1000-8000-00805f9b34fb");
 
-    private BluetoothGattCharacteristic mModeCharacteristic, mLevelCharacteristic;
+    private BluetoothGattCharacteristic mModeCharacteristic, mModeNotifyCharacteristic, mLevelCharacteristic;
 
     public BlinkyManager(final Context context) {
         super(context);
@@ -83,9 +83,10 @@ public class BlinkyManager extends BleManager<BlinkyManagerCallbacks> {
         @Override
         protected Deque<Request> initGatt(final BluetoothGatt gatt) {
             final LinkedList<Request> requests = new LinkedList<>();
+
+            //requests.push(Request.newReadRequest(mModeCharacteristic));
             requests.push(Request.newReadRequest(mLevelCharacteristic));
-            requests.push(Request.newReadRequest(mModeCharacteristic));
-            // requests.push(Request.newEnableNotificationsRequest(mModeCharacteristic));
+            requests.push(Request.newEnableNotificationsRequest(mLevelCharacteristic));
             return requests;
         }
 
@@ -102,8 +103,8 @@ public class BlinkyManager extends BleManager<BlinkyManagerCallbacks> {
                 final int rxProperties = mLevelCharacteristic.getProperties();
                 writeRequest = (rxProperties & BluetoothGattCharacteristic.PROPERTY_WRITE) > 0;
             }
-
-            return mModeCharacteristic != null && mLevelCharacteristic != null && writeRequest;
+            return true;
+            //return mModeCharacteristic != null && mLevelCharacteristic != null && writeRequest;
         }
 
         @Override
@@ -116,32 +117,29 @@ public class BlinkyManager extends BleManager<BlinkyManagerCallbacks> {
         protected void onCharacteristicRead(final BluetoothGatt gatt, final BluetoothGattCharacteristic characteristic) {
             final int data = characteristic.getIntValue(BluetoothGattCharacteristic.FORMAT_UINT8, 0);
             if (characteristic == mLevelCharacteristic) {
-                final boolean ledOn = data == 0x01;
-                log(LogContract.Log.Level.APPLICATION, "LED " + (ledOn ? "ON" : "OFF"));
-                mCallbacks.onDataSent(ledOn);
-            } else {
-                final boolean buttonPressed = data == 0x01;
-                log(LogContract.Log.Level.APPLICATION, "Button " + (buttonPressed ? "pressed" : "released"));
-                mCallbacks.onDataReceived(buttonPressed);
+                mCallbacks.onLevelReceived(data);
             }
+            if (characteristic == mModeNotifyCharacteristic) {
+                mCallbacks.onModeReceived(data);
+            }
+
         }
 
         @Override
         public void onCharacteristicWrite(final BluetoothGatt gatt, final BluetoothGattCharacteristic characteristic) {
             // This method is only called for LED characteristic
-            final int data = characteristic.getIntValue(BluetoothGattCharacteristic.FORMAT_UINT8, 0);
-            final boolean ledOn = data == 0x01;
-            log(LogContract.Log.Level.APPLICATION, "LED " + (ledOn ? "ON" : "OFF"));
-            mCallbacks.onDataSent(ledOn);
+
         }
 
         @Override
         public void onCharacteristicNotified(final BluetoothGatt gatt, final BluetoothGattCharacteristic characteristic) {
-            // This method is only called for Button characteristic
             final int data = characteristic.getIntValue(BluetoothGattCharacteristic.FORMAT_UINT8, 0);
-            final boolean buttonPressed = data == 0x01;
-            log(LogContract.Log.Level.APPLICATION, "Button " + (buttonPressed ? "pressed" : "released"));
-            mCallbacks.onDataReceived(buttonPressed);
+            if (characteristic == mLevelCharacteristic) {
+                mCallbacks.onLevelReceived(data);
+            }
+            if (characteristic == mModeNotifyCharacteristic) {
+                mCallbacks.onModeReceived(data);
+            }
         }
     };
 

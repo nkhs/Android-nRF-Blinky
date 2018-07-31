@@ -28,16 +28,17 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package no.nordicsemi.android.blinky.viewmodels;
+package com.ble.android.netknight.viewmodels;
 
 import android.arch.lifecycle.LiveData;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
+import com.ble.android.netknight.adapter.ExtendedBluetoothDevice;
+
 import java.util.ArrayList;
 import java.util.List;
 
-import no.nordicsemi.android.blinky.adapter.ExtendedBluetoothDevice;
 import no.nordicsemi.android.support.v18.scanner.ScanResult;
 
 /**

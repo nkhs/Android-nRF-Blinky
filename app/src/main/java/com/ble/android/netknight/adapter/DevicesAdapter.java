@@ -28,7 +28,7 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package no.nordicsemi.android.blinky.adapter;
+package com.ble.android.netknight.adapter;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -40,13 +40,14 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.ble.android.netknight.ScannerActivity;
+
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import no.nordicsemi.android.blinky.ScannerActivity;
 import no.nordicsemi.android.blinky.R;
-import no.nordicsemi.android.blinky.viewmodels.ScannerLiveData;
+import com.ble.android.netknight.viewmodels.ScannerLiveData;
 
 @SuppressWarnings("unused")
 public class DevicesAdapter extends RecyclerView.Adapter<DevicesAdapter.ViewHolder> {

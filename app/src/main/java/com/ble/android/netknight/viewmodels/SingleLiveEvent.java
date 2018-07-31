@@ -14,7 +14,7 @@
  *  limitations under the License.
  */
 
-package no.nordicsemi.android.blinky.viewmodels;
+package com.ble.android.netknight.viewmodels;
 
 import android.arch.lifecycle.LifecycleOwner;
 import android.arch.lifecycle.MutableLiveData;
