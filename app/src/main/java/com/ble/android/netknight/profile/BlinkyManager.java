@@ -16,9 +16,7 @@ import no.nordicsemi.android.ble.Request;
 import no.nordicsemi.android.log.LogContract;
 
 public class BlinkyManager extends BleManager<BlinkyManagerCallbacks> {
-    /**
-     * Nordic Blinky Service UUID.
-     */
+
 //    public final static UUID BLE_UUID_SERVICE = UUID.fromString("00001977-0000-1000-8000-00805f9b34fb");//180d
     public final static UUID BLE_UUID_SERVICE = UUID.fromString("00001207-0000-1000-8000-00805f9b34fb");
     /**
