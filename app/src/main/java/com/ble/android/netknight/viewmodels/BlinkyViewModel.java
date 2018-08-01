@@ -38,7 +38,8 @@ import android.bluetooth.BluetoothDevice;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
-import no.nordicsemi.android.blinky.R;
+
+import com.ble.android.netknight.R;
 import com.ble.android.netknight.adapter.ExtendedBluetoothDevice;
 import com.ble.android.netknight.profile.BlinkyManager;
 import com.ble.android.netknight.profile.BlinkyManagerCallbacks;

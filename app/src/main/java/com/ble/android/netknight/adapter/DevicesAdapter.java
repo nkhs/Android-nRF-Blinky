@@ -40,13 +40,14 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.ble.android.netknight.R;
 import com.ble.android.netknight.ScannerActivity;
 
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import no.nordicsemi.android.blinky.R;
+
 import com.ble.android.netknight.viewmodels.ScannerLiveData;
 
 @SuppressWarnings("unused")

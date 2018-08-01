@@ -50,7 +50,7 @@ import com.ble.android.netknight.adapter.ExtendedBluetoothDevice;
 
 @SuppressWarnings("ConstantConditions")
 public class BlinkyActivity extends AppCompatActivity implements RandomEventListener {
-    public static final String EXTRA_DEVICE = "no.nordicsemi.android.blinky.EXTRA_DEVICE";
+    public static final String EXTRA_DEVICE = "EXTRA_DEVICE";
 
     byte currentLevel = 10;
 
@@ -64,7 +64,7 @@ public class BlinkyActivity extends AppCompatActivity implements RandomEventList
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(no.nordicsemi.android.blinky.R.layout.activity_blinky);
+        setContentView(R.layout.activity_blinky);
 
 //        RandomThread randomThread = new RandomThread();
 //        randomThread.setListener(this);
@@ -75,7 +75,7 @@ public class BlinkyActivity extends AppCompatActivity implements RandomEventList
         final String deviceName = device.getName();
         final String deviceAddress = device.getAddress();
 
-        final Toolbar toolbar = findViewById(no.nordicsemi.android.blinky.R.id.toolbar);
+        final Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle(deviceName);
         getSupportActionBar().setSubtitle(deviceAddress);
@@ -86,81 +86,81 @@ public class BlinkyActivity extends AppCompatActivity implements RandomEventList
         viewModel.connect(device);
 
         // Set up views
-        labelOutlet = findViewById(no.nordicsemi.android.blinky.R.id.labelOutlet);
+        labelOutlet = findViewById(R.id.labelOutlet);
 
-        final LinearLayout progressContainer = findViewById(no.nordicsemi.android.blinky.R.id.progress_container);
-        final TextView connectionState = findViewById(no.nordicsemi.android.blinky.R.id.connection_state);
-        final View content = findViewById(no.nordicsemi.android.blinky.R.id.device_container);
+        final LinearLayout progressContainer = findViewById(R.id.progress_container);
+        final TextView connectionState = findViewById(R.id.connection_state);
+        final View content = findViewById(R.id.device_container);
 
-        btnLevelOutlet = findViewById(no.nordicsemi.android.blinky.R.id.btn_level);
+        btnLevelOutlet = findViewById(R.id.btn_level);
         btnLevelOutlet.setOnClickListener(view -> {
             final Dialog dialog = new Dialog(this);
-            dialog.setContentView(no.nordicsemi.android.blinky.R.layout.dialog_level);
-            dialog.findViewById(no.nordicsemi.android.blinky.R.id.btn_level_1).setOnClickListener(v -> {
-                btnLevelOutlet.setText(no.nordicsemi.android.blinky.R.string.level_1);
+            dialog.setContentView(R.layout.dialog_level);
+            dialog.findViewById(R.id.btn_level_1).setOnClickListener(v -> {
+                btnLevelOutlet.setText(R.string.level_1);
                 currentLevel = 1;
                 viewModel.writeLevel(currentLevel);
                 dialog.dismiss();
             });
 
-            dialog.findViewById(no.nordicsemi.android.blinky.R.id.btn_level_2).setOnClickListener(v -> {
-                btnLevelOutlet.setText(no.nordicsemi.android.blinky.R.string.level_2);
+            dialog.findViewById(R.id.btn_level_2).setOnClickListener(v -> {
+                btnLevelOutlet.setText(R.string.level_2);
                 currentLevel = 2;
                 viewModel.writeLevel(currentLevel);
                 dialog.dismiss();
             });
 
-            dialog.findViewById(no.nordicsemi.android.blinky.R.id.btn_level_3).setOnClickListener(v -> {
-                btnLevelOutlet.setText(no.nordicsemi.android.blinky.R.string.level_3);
+            dialog.findViewById(R.id.btn_level_3).setOnClickListener(v -> {
+                btnLevelOutlet.setText(R.string.level_3);
                 currentLevel = 3;
                 viewModel.writeLevel(currentLevel);
                 dialog.dismiss();
             });
 
-            dialog.findViewById(no.nordicsemi.android.blinky.R.id.btn_level_4).setOnClickListener(v -> {
-                btnLevelOutlet.setText(no.nordicsemi.android.blinky.R.string.level_4);
+            dialog.findViewById(R.id.btn_level_4).setOnClickListener(v -> {
+                btnLevelOutlet.setText(R.string.level_4);
                 currentLevel = 4;
                 viewModel.writeLevel(currentLevel);
                 dialog.dismiss();
             });
 
-            dialog.findViewById(no.nordicsemi.android.blinky.R.id.btn_level_5).setOnClickListener(v -> {
-                btnLevelOutlet.setText(no.nordicsemi.android.blinky.R.string.level_5);
+            dialog.findViewById(R.id.btn_level_5).setOnClickListener(v -> {
+                btnLevelOutlet.setText(R.string.level_5);
                 currentLevel = 5;
                 viewModel.writeLevel(currentLevel);
                 dialog.dismiss();
             });
 
-            dialog.findViewById(no.nordicsemi.android.blinky.R.id.btn_level_6).setOnClickListener(v -> {
-                btnLevelOutlet.setText(no.nordicsemi.android.blinky.R.string.level_6);
+            dialog.findViewById(R.id.btn_level_6).setOnClickListener(v -> {
+                btnLevelOutlet.setText(R.string.level_6);
                 currentLevel = 6;
                 viewModel.writeLevel(currentLevel);
                 dialog.dismiss();
             });
 
-            dialog.findViewById(no.nordicsemi.android.blinky.R.id.btn_level_7).setOnClickListener(v -> {
-                btnLevelOutlet.setText(no.nordicsemi.android.blinky.R.string.level_7);
+            dialog.findViewById(R.id.btn_level_7).setOnClickListener(v -> {
+                btnLevelOutlet.setText(R.string.level_7);
                 currentLevel = 7;
                 viewModel.writeLevel(currentLevel);
                 dialog.dismiss();
             });
 
-            dialog.findViewById(no.nordicsemi.android.blinky.R.id.btn_level_8).setOnClickListener(v -> {
-                btnLevelOutlet.setText(no.nordicsemi.android.blinky.R.string.level_8);
+            dialog.findViewById(R.id.btn_level_8).setOnClickListener(v -> {
+                btnLevelOutlet.setText(R.string.level_8);
                 currentLevel = 8;
                 viewModel.writeLevel(currentLevel);
                 dialog.dismiss();
             });
 
-            dialog.findViewById(no.nordicsemi.android.blinky.R.id.btn_level_9).setOnClickListener(v -> {
-                btnLevelOutlet.setText(no.nordicsemi.android.blinky.R.string.level_9);
+            dialog.findViewById(R.id.btn_level_9).setOnClickListener(v -> {
+                btnLevelOutlet.setText(R.string.level_9);
                 currentLevel = 9;
                 viewModel.writeLevel(currentLevel);
                 dialog.dismiss();
             });
 
-            dialog.findViewById(no.nordicsemi.android.blinky.R.id.btn_level_10).setOnClickListener(v -> {
-                btnLevelOutlet.setText(no.nordicsemi.android.blinky.R.string.level_10);
+            dialog.findViewById(R.id.btn_level_10).setOnClickListener(v -> {
+                btnLevelOutlet.setText(R.string.level_10);
                 currentLevel = 10;
                 viewModel.writeLevel(currentLevel);
                 dialog.dismiss();
@@ -170,12 +170,12 @@ public class BlinkyActivity extends AppCompatActivity implements RandomEventList
             dialog.show();
         });
 
-        toggleSwitch = findViewById(no.nordicsemi.android.blinky.R.id.switch_button);
+        toggleSwitch = findViewById(R.id.switch_button);
         toggleSwitch.setOnCheckedChangeListener((view, isChecked) -> {
             updateButton(isChecked, true);
         });
 
-        randomSwitch = findViewById(no.nordicsemi.android.blinky.R.id.switch_random);
+        randomSwitch = findViewById(R.id.switch_random);
         randomSwitch.setOnCheckedChangeListener((view, isChecked) -> {
             updateRandomButton(isChecked, true);
         });
@@ -187,13 +187,13 @@ public class BlinkyActivity extends AppCompatActivity implements RandomEventList
         viewModel.getConnectionState().observe(this, connectionState::setText);
         viewModel.isConnected().observe(this, connected -> {
             if (!connected) {
-                Toast.makeText(this, no.nordicsemi.android.blinky.R.string.state_disconnected, Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, R.string.state_disconnected, Toast.LENGTH_SHORT).show();
                 finish();
             }
         });
         viewModel.isSupported().observe(this, supported -> {
             if (!supported) {
-                Toast.makeText(this, no.nordicsemi.android.blinky.R.string.state_not_supported, Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, R.string.state_not_supported, Toast.LENGTH_SHORT).show();
             }
         });
         viewModel.getLevelState().observe(this, level -> btnLevelOutlet.setText("Level " + level));

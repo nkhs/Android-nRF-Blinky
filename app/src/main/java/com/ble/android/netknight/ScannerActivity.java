@@ -52,6 +52,7 @@ import android.widget.Button;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+
 import com.ble.android.netknight.adapter.DevicesAdapter;
 import com.ble.android.netknight.adapter.ExtendedBluetoothDevice;
 import com.ble.android.netknight.utils.Utils;
@@ -59,139 +60,146 @@ import com.ble.android.netknight.viewmodels.ScannerLiveData;
 import com.ble.android.netknight.viewmodels.ScannerViewModel;
 
 public class ScannerActivity extends AppCompatActivity implements DevicesAdapter.OnItemClickListener {
-	private static final int REQUEST_ACCESS_COARSE_LOCATION = 1022; // random number
+    private static final int REQUEST_ACCESS_COARSE_LOCATION = 1022; // random number
 
-	private ScannerViewModel mScannerViewModel;
+    private ScannerViewModel mScannerViewModel;
 
-	@BindView(no.nordicsemi.android.blinky.R.id.state_scanning) View mScanningView;
-	@BindView(no.nordicsemi.android.blinky.R.id.no_devices)View mEmptyView;
-	@BindView(no.nordicsemi.android.blinky.R.id.no_location_permission) View mNoLocationPermissionView;
-	@BindView(no.nordicsemi.android.blinky.R.id.action_grant_location_permission) Button mGrantPermissionButton;
-	@BindView(no.nordicsemi.android.blinky.R.id.action_permission_settings) Button mPermissionSettingsButton;
-	@BindView(no.nordicsemi.android.blinky.R.id.no_location)	View mNoLocationView;
-	@BindView(no.nordicsemi.android.blinky.R.id.bluetooth_off) View mNoBluetoothView;
+    @BindView(R.id.state_scanning)
+    View mScanningView;
+    @BindView(R.id.no_devices)
+    View mEmptyView;
+    @BindView(R.id.no_location_permission)
+    View mNoLocationPermissionView;
+    @BindView(R.id.action_grant_location_permission)
+    Button mGrantPermissionButton;
+    @BindView(R.id.action_permission_settings)
+    Button mPermissionSettingsButton;
+    @BindView(R.id.no_location)
+    View mNoLocationView;
+    @BindView(R.id.bluetooth_off)
+    View mNoBluetoothView;
 
-	@Override
-	protected void onCreate(@Nullable final Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(no.nordicsemi.android.blinky.R.layout.activity_scanner);
-		ButterKnife.bind(this);
+    @Override
+    protected void onCreate(@Nullable final Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_scanner);
+        ButterKnife.bind(this);
 
-		final Toolbar toolbar = findViewById(no.nordicsemi.android.blinky.R.id.toolbar);
-		setSupportActionBar(toolbar);
-		getSupportActionBar().setTitle(no.nordicsemi.android.blinky.R.string.app_name);
+        final Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle(R.string.app_name);
 
-		// Create view model containing utility methods for scanning
-		mScannerViewModel = ViewModelProviders.of(this).get(ScannerViewModel.class);
-		mScannerViewModel.getScannerState().observe(this, this::startScan);
+        // Create view model containing utility methods for scanning
+        mScannerViewModel = ViewModelProviders.of(this).get(ScannerViewModel.class);
+        mScannerViewModel.getScannerState().observe(this, this::startScan);
 
-		// Configure the recycler view
-		final RecyclerView recyclerView = findViewById(no.nordicsemi.android.blinky.R.id.recycler_view_ble_devices);
-		recyclerView.setLayoutManager(new LinearLayoutManager(this));
-		final DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(recyclerView.getContext(), DividerItemDecoration.VERTICAL);
-		recyclerView.addItemDecoration(dividerItemDecoration);
-		((SimpleItemAnimator) recyclerView.getItemAnimator()).setSupportsChangeAnimations(false);
-		final DevicesAdapter adapter = new DevicesAdapter(this, mScannerViewModel.getScannerState());
-		adapter.setOnItemClickListener(this);
-		recyclerView.setAdapter(adapter);
-	}
+        // Configure the recycler view
+        final RecyclerView recyclerView = findViewById(R.id.recycler_view_ble_devices);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        final DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(recyclerView.getContext(), DividerItemDecoration.VERTICAL);
+        recyclerView.addItemDecoration(dividerItemDecoration);
+        ((SimpleItemAnimator) recyclerView.getItemAnimator()).setSupportsChangeAnimations(false);
+        final DevicesAdapter adapter = new DevicesAdapter(this, mScannerViewModel.getScannerState());
+        adapter.setOnItemClickListener(this);
+        recyclerView.setAdapter(adapter);
+    }
 
-	@Override
-	protected void onStop() {
-		super.onStop();
-		stopScan();
-	}
+    @Override
+    protected void onStop() {
+        super.onStop();
+        stopScan();
+    }
 
-	@Override
-	public void onItemClick(final ExtendedBluetoothDevice device) {
-		final Intent controlBlinkIntent = new Intent(this, BlinkyActivity.class);
-		controlBlinkIntent.putExtra(BlinkyActivity.EXTRA_DEVICE, device);
-		startActivity(controlBlinkIntent);
-	}
+    @Override
+    public void onItemClick(final ExtendedBluetoothDevice device) {
+        final Intent controlBlinkIntent = new Intent(this, BlinkyActivity.class);
+        controlBlinkIntent.putExtra(BlinkyActivity.EXTRA_DEVICE, device);
+        startActivity(controlBlinkIntent);
+    }
 
-	@Override
-	public void onRequestPermissionsResult(final int requestCode, @NonNull final String[] permissions, @NonNull final int[] grantResults) {
-		super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-		switch (requestCode) {
-			case REQUEST_ACCESS_COARSE_LOCATION:
-				mScannerViewModel.refresh();
-				break;
-		}
-	}
+    @Override
+    public void onRequestPermissionsResult(final int requestCode, @NonNull final String[] permissions, @NonNull final int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        switch (requestCode) {
+            case REQUEST_ACCESS_COARSE_LOCATION:
+                mScannerViewModel.refresh();
+                break;
+        }
+    }
 
-	@OnClick(no.nordicsemi.android.blinky.R.id.action_enable_location)
-	public void onEnableLocationClicked() {
-		final Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-		startActivity(intent);
-	}
+    @OnClick(R.id.action_enable_location)
+    public void onEnableLocationClicked() {
+        final Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+        startActivity(intent);
+    }
 
-	@OnClick(no.nordicsemi.android.blinky.R.id.action_enable_bluetooth)
-	public void onEnableBluetoothClicked() {
-		final Intent enableIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
-		startActivity(enableIntent);
-	}
+    @OnClick(R.id.action_enable_bluetooth)
+    public void onEnableBluetoothClicked() {
+        final Intent enableIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
+        startActivity(enableIntent);
+    }
 
-	@OnClick(no.nordicsemi.android.blinky.R.id.action_grant_location_permission)
-	public void onGrantLocationPermissionClicked() {
-		Utils.markLocationPermissionRequested(this);
-		ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, REQUEST_ACCESS_COARSE_LOCATION);
-	}
+    @OnClick(R.id.action_grant_location_permission)
+    public void onGrantLocationPermissionClicked() {
+        Utils.markLocationPermissionRequested(this);
+        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, REQUEST_ACCESS_COARSE_LOCATION);
+    }
 
-	@OnClick(no.nordicsemi.android.blinky.R.id.action_permission_settings)
-	public void onPermissionSettingsClicked() {
-		final Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
-		intent.setData(Uri.fromParts("package", getPackageName(), null));
-		startActivity(intent);
-	}
+    @OnClick(R.id.action_permission_settings)
+    public void onPermissionSettingsClicked() {
+        final Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+        intent.setData(Uri.fromParts("package", getPackageName(), null));
+        startActivity(intent);
+    }
 
-	/**
-	 * Start scanning for Bluetooth devices or displays a message based on the scanner state.
-	 */
-	private void startScan(final ScannerLiveData state) {
-		// First, check the Location permission. This is required on Marshmallow onwards in order to scan for Bluetooth LE devices.
-		if (Utils.isLocationPermissionsGranted(this)) {
-			mNoLocationPermissionView.setVisibility(View.GONE);
+    /**
+     * Start scanning for Bluetooth devices or displays a message based on the scanner state.
+     */
+    private void startScan(final ScannerLiveData state) {
+        // First, check the Location permission. This is required on Marshmallow onwards in order to scan for Bluetooth LE devices.
+        if (Utils.isLocationPermissionsGranted(this)) {
+            mNoLocationPermissionView.setVisibility(View.GONE);
 
-			// Bluetooth must be enabled
-			if (state.isBluetoothEnabled()) {
-				mNoBluetoothView.setVisibility(View.GONE);
+            // Bluetooth must be enabled
+            if (state.isBluetoothEnabled()) {
+                mNoBluetoothView.setVisibility(View.GONE);
 
-				// We are now OK to start scanning
-				mScannerViewModel.startScan();
-				mScanningView.setVisibility(View.VISIBLE);
+                // We are now OK to start scanning
+                mScannerViewModel.startScan();
+                mScanningView.setVisibility(View.VISIBLE);
 
-				if (state.isEmpty()) {
-					mEmptyView.setVisibility(View.VISIBLE);
+                if (state.isEmpty()) {
+                    mEmptyView.setVisibility(View.VISIBLE);
 
-					if (!Utils.isLocationRequired(this) || Utils.isLocationEnabled(this)) {
-						mNoLocationView.setVisibility(View.INVISIBLE);
-					} else {
-						mNoLocationView.setVisibility(View.VISIBLE);
-					}
-				} else {
-					mEmptyView.setVisibility(View.GONE);
-				}
-			} else {
-				mNoBluetoothView.setVisibility(View.VISIBLE);
-				mScanningView.setVisibility(View.INVISIBLE);
-				mEmptyView.setVisibility(View.GONE);
-			}
-		} else {
-			mNoLocationPermissionView.setVisibility(View.VISIBLE);
-			mNoBluetoothView.setVisibility(View.GONE);
-			mScanningView.setVisibility(View.INVISIBLE);
-			mEmptyView.setVisibility(View.GONE);
+                    if (!Utils.isLocationRequired(this) || Utils.isLocationEnabled(this)) {
+                        mNoLocationView.setVisibility(View.INVISIBLE);
+                    } else {
+                        mNoLocationView.setVisibility(View.VISIBLE);
+                    }
+                } else {
+                    mEmptyView.setVisibility(View.GONE);
+                }
+            } else {
+                mNoBluetoothView.setVisibility(View.VISIBLE);
+                mScanningView.setVisibility(View.INVISIBLE);
+                mEmptyView.setVisibility(View.GONE);
+            }
+        } else {
+            mNoLocationPermissionView.setVisibility(View.VISIBLE);
+            mNoBluetoothView.setVisibility(View.GONE);
+            mScanningView.setVisibility(View.INVISIBLE);
+            mEmptyView.setVisibility(View.GONE);
 
-			final boolean deniedForever = Utils.isLocationPermissionDeniedForever(this);
-			mGrantPermissionButton.setVisibility(deniedForever ? View.GONE : View.VISIBLE);
-			mPermissionSettingsButton.setVisibility(deniedForever ? View.VISIBLE : View.GONE);
-		}
-	}
+            final boolean deniedForever = Utils.isLocationPermissionDeniedForever(this);
+            mGrantPermissionButton.setVisibility(deniedForever ? View.GONE : View.VISIBLE);
+            mPermissionSettingsButton.setVisibility(deniedForever ? View.VISIBLE : View.GONE);
+        }
+    }
 
-	/**
-	 * stop scanning for bluetooth devices.
-	 */
-	private void stopScan() {
-		mScannerViewModel.stopScan();
-	}
+    /**
+     * stop scanning for bluetooth devices.
+     */
+    private void stopScan() {
+        mScannerViewModel.stopScan();
+    }
 }

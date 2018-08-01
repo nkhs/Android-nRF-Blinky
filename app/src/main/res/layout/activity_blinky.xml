@@ -98,8 +98,10 @@
                     android:layout_height="50dp"
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
+                    app:sb_checked_color="@color/colorPrimary"
                     app:sb_enable_effect="false"
-                    app:sb_show_indicator="false" />
+                    app:sb_show_indicator="false"
+                    app:sb_uncheck_color="#B7B7B7" />
             </RelativeLayout>
 
             <Button
@@ -136,8 +138,10 @@
                     android:layout_height="50dp"
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
+                    app:sb_checked_color="@color/colorPrimary"
                     app:sb_enable_effect="false"
-                    app:sb_show_indicator="false" />
+                    app:sb_show_indicator="false"
+                    app:sb_uncheck_color="#B7B7B7" />
             </RelativeLayout>
 
             <TextView
