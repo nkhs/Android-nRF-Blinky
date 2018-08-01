@@ -197,6 +197,7 @@ public class ControlActivity extends AppCompatActivity {
                 viewModel.writeMode((byte) 0x01);
             }
             randomSwitch.setEnabled(false);
+            randomSwitch.setChecked(false);
         } else {
             if (isUpdate) {
                 viewModel.writeMode((byte) 0x02);
@@ -218,6 +219,7 @@ public class ControlActivity extends AppCompatActivity {
                 viewModel.writeMode((byte) 0x03);
             }
             toggleSwitch.setEnabled(false);
+            toggleSwitch.setChecked(false);
             btnLevelOutlet.setEnabled(false);
             btnLevelOutlet.setBackground(getResources().getDrawable(R.drawable.start_stop_button_background_disabled));
 
