@@ -49,7 +49,7 @@ import com.suke.widget.SwitchButton;
 import com.ble.android.netknight.adapter.ExtendedBluetoothDevice;
 
 @SuppressWarnings("ConstantConditions")
-public class BlinkyActivity extends AppCompatActivity implements RandomEventListener {
+public class ControlActivity extends AppCompatActivity {
     public static final String EXTRA_DEVICE = "EXTRA_DEVICE";
 
     byte currentLevel = 10;
@@ -64,11 +64,7 @@ public class BlinkyActivity extends AppCompatActivity implements RandomEventList
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_blinky);
-
-//        RandomThread randomThread = new RandomThread();
-//        randomThread.setListener(this);
-//        new Thread(randomThread).start();
+        setContentView(R.layout.activity_control);
 
         final Intent intent = getIntent();
         final ExtendedBluetoothDevice device = intent.getParcelableExtra(EXTRA_DEVICE);
@@ -172,12 +168,12 @@ public class BlinkyActivity extends AppCompatActivity implements RandomEventList
 
         toggleSwitch = findViewById(R.id.switch_button);
         toggleSwitch.setOnCheckedChangeListener((view, isChecked) -> {
-            updateButton(isChecked, true);
+            updateButton(isChecked, true, false);
         });
 
         randomSwitch = findViewById(R.id.switch_random);
         randomSwitch.setOnCheckedChangeListener((view, isChecked) -> {
-            updateRandomButton(isChecked, true);
+            updateRandomButton(isChecked, true, false);
         });
 
         viewModel.isDeviceReady().observe(this, deviceReady -> {
@@ -198,21 +194,22 @@ public class BlinkyActivity extends AppCompatActivity implements RandomEventList
         });
         viewModel.getLevelState().observe(this, level -> btnLevelOutlet.setText("Level " + level));
         viewModel.getModeState().observe(this, mode -> {
+
             switch (mode) {
                 case 0x01:
-                    this.updateButton(true, false);
+                    this.updateButton(true, false, true);
                     this.labelOutlet.setVisibility(View.VISIBLE);
                     break;
                 case 0x02:
-                    this.updateButton(false, false);
+                    this.updateButton(false, false, true);
                     this.labelOutlet.setVisibility(View.INVISIBLE);
                     break;
                 case 0x03:
-                    this.updateRandomButton(true, false);
+                    this.updateRandomButton(true, false, true);
                     this.labelOutlet.setVisibility(View.INVISIBLE);
                     break;
                 case 0x04:
-                    this.updateRandomButton(false, false);
+                    this.updateRandomButton(false, false, true);
                     this.labelOutlet.setVisibility(View.INVISIBLE);
                     break;
                 default:
@@ -223,13 +220,12 @@ public class BlinkyActivity extends AppCompatActivity implements RandomEventList
 
     }
 
-    void updateButton(boolean isChecked, boolean isUpdate) {
+    void updateButton(boolean isChecked, boolean isUpdate, boolean updateSwitch) {
         if (isChecked) {
             if (isUpdate) {
                 viewModel.writeMode((byte) 0x01);
             }
             randomSwitch.setEnabled(false);
-
         } else {
             if (isUpdate) {
                 viewModel.writeMode((byte) 0x02);
@@ -237,9 +233,14 @@ public class BlinkyActivity extends AppCompatActivity implements RandomEventList
 
             randomSwitch.setEnabled(true);
         }
+
+        if (updateSwitch) {
+            toggleSwitch.setChecked(isChecked);
+        }
     }
 
-    void updateRandomButton(boolean isCheckedRandom, boolean isUpdate) {
+
+    void updateRandomButton(boolean isCheckedRandom, boolean isUpdate, boolean updateSwitch) {
         if (isCheckedRandom) {
             if (isUpdate) {
 
@@ -247,7 +248,7 @@ public class BlinkyActivity extends AppCompatActivity implements RandomEventList
             }
             toggleSwitch.setEnabled(false);
             btnLevelOutlet.setEnabled(false);
-
+            btnLevelOutlet.setBackground(getResources().getDrawable(R.drawable.start_stop_button_background_disabled));
 
         } else {
             if (isUpdate) {
@@ -256,6 +257,10 @@ public class BlinkyActivity extends AppCompatActivity implements RandomEventList
 
             toggleSwitch.setEnabled(true);
             btnLevelOutlet.setEnabled(true);
+            btnLevelOutlet.setBackground(getResources().getDrawable(R.drawable.start_stop_button_background));
+        }
+        if (updateSwitch) {
+            randomSwitch.setChecked(isCheckedRandom);
         }
     }
 
@@ -269,9 +274,4 @@ public class BlinkyActivity extends AppCompatActivity implements RandomEventList
         return false;
     }
 
-    @Override
-    public void onSpeed(byte speed) {
-//        Log.d("TEST", "random " + speed + ", " + isRandomMode);
-//        if (!isRandomMode) return;
-    }
 }
