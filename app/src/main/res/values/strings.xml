@@ -1,5 +1,3 @@
-
-
 <resources>
     <string name="app_name">NetKnightController</string>
     <string name="feature_name">NetKnight</string>
@@ -26,9 +24,8 @@
     <string name="bluetooth_disabled_info">The Bluetooth adapter is turned off. Click the button below to enable it.</string>
     <string name="bluetooth_disabled_action">Enable</string>
 
-    <string name="blinky_guide_title">CAN\'T SEE YOUR DEVICE?</string>
-    <string name="blinky_guide_info">1. Make sure the DK is <b>turned on</b> and is connected to a power source using a micro USB cable or a coin cell is plugged in.
-        \n\n2. Make sure your firmware and SoftDevice are flashed.</string>
+    <string name="blinky_guide_title">Can\'t connect to the NetKnight?</string>
+    <string name="blinky_guide_info">Make sure the NetKnight is plugged in or the battery pack is turned on.\nMake sure Bluetooth is enabled on your device.</string>
     <string name="blinky_guide_location_info">3. Location is turned off. Some Android phones require it enabled in order to scan for Bluetooth LE devices.
 		If you are sure your Device is advertising and it doesn\'t show up here, click the button below to enable Location.</string>
     <string name="blinky_guide_location_action">Enable</string>
