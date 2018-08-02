@@ -27,7 +27,6 @@
         </activity>
         <activity
             android:name=".ScannerActivity"
-            android:icon="@drawable/ic_blinky_feature"
             android:label="@string/feature_name"
             android:launchMode="singleTop">
             <intent-filter>
